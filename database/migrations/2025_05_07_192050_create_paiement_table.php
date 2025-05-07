@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ordonnance', function (Blueprint $table) {
+        Schema::create('paiement', function (Blueprint $table) {
             $table->id();
             $table->foreignId('consultationId')->constrained('consultation')->onDelete('cascade');
-            $table->text('medicament');
-            $table->text('dose');
-            $table->text('instructions');
-            $table->timestamp('dateCréation')->useCurrent();
+            $table->foreignId('medecinId')->constrained('medecin')->onDelete('cascade');
+            $table->decimal('montant', 8, 2);
+            $table->enum('méthode', ['MobileMoney', 'Carte']);
+            $table->enum('statut', ['en attente', 'effectué', 'échoué']);
+            $table->timestamp('date');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ordonnance');
+        Schema::dropIfExists('paiement');
     }
 };

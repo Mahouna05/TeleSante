@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medecin', function (Blueprint $table) {
+        Schema::create('message', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('specialite');
-            $table->string('numeroProfessionnel');
-            $table->string('experience');
+            $table->foreignId('senderId')->constrained('patient')->onDelete('cascade');
+            $table->foreignId('receiverId')->constrained('medecin')->onDelete('cascade');
+            $table->timestamp('dateEnvoi');
+            $table->text('contenu');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medecin');
+        Schema::dropIfExists('message');
     }
 };

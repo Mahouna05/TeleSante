@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('consultation', function (Blueprint $table) {
+        Schema::create('rendez_vous', function (Blueprint $table) {
             $table->id();
             $table->foreignId('patientId')->constrained('patient')->onDelete('cascade');
             $table->foreignId('medecinId')->constrained('medecin')->onDelete('cascade');
-            $table->timestamp('date');
-            $table->enum('type', ['vidéo', 'chat']);
-            $table->text('notes')->nullable();
-            $table->enum('statut', ['en attente', 'terminée', 'annulée']);
+            $table->text('motif');
+            $table->enum('moyen', ['vidéo', 'chat', 'audio']);
+            $table->timestamp('dateHeure');
+            $table->string('tarif');
+            $table->enum('statut', ['en attente', 'confirmé', 'annulé']);
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('consultation');
+        Schema::dropIfExists('rendez_vous');
     }
 };

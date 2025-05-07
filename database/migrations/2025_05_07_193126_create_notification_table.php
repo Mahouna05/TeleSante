@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('medecin', function (Blueprint $table) {
+        Schema::create('notification', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->string('specialite');
-            $table->string('numeroProfessionnel');
-            $table->string('experience');
+            $table->foreignId('userId')->constrained('user')->onDelete('cascade');
+            $table->enum('type', ['rappel', 'alerte', 'info']);
+            $table->text('message');
+            $table->boolean('lu')->default(false);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('medecin');
+        Schema::dropIfExists('notification');
     }
 };
