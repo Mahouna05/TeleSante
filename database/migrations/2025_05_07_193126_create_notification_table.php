@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('notification', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userId')->constrained('user')->onDelete('cascade');
+            $table->foreignId('userId')->constrained('users')->onDelete('cascade');
             $table->enum('type', ['rappel', 'alerte', 'info']);
             $table->text('message');
             $table->boolean('lu')->default(false);

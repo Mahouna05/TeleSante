@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('dose');
             $table->date('date_début');
             $table->date('date_fin');
+            $table->foreignId('patientId')->constrained('patient')->onDelete('cascade');
+            $table->foreignId('ordonnanceId')->constrained('ordonnance')->onDelete('cascade');
             $table->timestamps();
         });
     }

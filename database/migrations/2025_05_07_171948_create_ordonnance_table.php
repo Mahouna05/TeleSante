@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('ordonnance', function (Blueprint $table) {
             $table->id();
             $table->foreignId('consultationId')->constrained('consultation')->onDelete('cascade');
-            $table->text('medicament');
-            $table->text('dose');
+            $table->foreignId('patientId')->constrained('patient')->onDelete('cascade');
+            $table->foreignId('medecinId')->constrained('medecin')->onDelete('cascade');
+            $table->string('medicament');
+            $table->string('dose');
+            $table->string('durée');
             $table->text('instructions');
             $table->timestamp('dateCréation')->useCurrent();
             $table->timestamps();
