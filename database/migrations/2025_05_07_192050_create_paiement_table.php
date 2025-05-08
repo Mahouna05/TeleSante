@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('consultationId')->constrained('consultation')->onDelete('cascade');
             $table->foreignId('medecinId')->constrained('medecin')->onDelete('cascade');
+            $table->foreignId('patientId')->constrained('patient')->onDelete('cascade');
             $table->decimal('montant', 8, 2);
             $table->enum('méthode', ['MobileMoney', 'Carte']);
             $table->enum('statut', ['en attente', 'effectué', 'échoué']);
